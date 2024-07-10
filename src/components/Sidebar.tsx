@@ -2,7 +2,8 @@ import {Perfume, perfumeData} from "../perfumeData.ts";
 
 function Sidebar ()  {
 	return (
-		<aside className="px-5 items-center flex-col inline-flex">
+		<aside className="hidden lg:block">
+			<div className="px-5 items-center flex-col inline-flex">
 			<p className="font-bold m-6">
 				{`${perfumeData.length} Produkter`}
 			</p>
@@ -17,15 +18,16 @@ function Sidebar ()  {
 				<input placeholder="SÖK" className="border-[0.5px] border-gray-300 p-2"/>
 
 				{perfumeData && perfumeData.map((product: Perfume) => (
-					<div key={product.id} className="flex items-center space-x-3">
-						<input type="checkbox" id={`brand-${product.id}`} className="form-checkbox" />
+					<div key={product.id} className="flex items-center mb-10 space-x-3 ">
+						<input type="checkbox" id={`brand-${product.id}`} className="form-checkbox"/>
 						<label htmlFor={`brand-${product.id}`} className="text-sm">{product.brand}</label>
 					</div>
 				))}
-		</div>
-</aside>
-
-)
+				<div className="my-3 border-b-2 border-gray-300 inline-block " >Visa alla</div>
+			</div>
+			</div>
+		</aside>
+	)
 }
 
 export default Sidebar
