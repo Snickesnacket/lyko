@@ -8,7 +8,7 @@ import Footer from "./components/Footer.tsx";
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-      <div className="bg-white min-h-screen py-20">
+      <div className="bg-white min-h-screen pt-20">
           <Navbar />
             <App />
           <Footer />
