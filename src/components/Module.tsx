@@ -14,7 +14,7 @@ function Module () {
 			<div className=" grid grid-cols-2 md:grid-cols-3 w-full gap-10 justify-items-center">
 				{perfumeData && perfumeData.map((product: Perfume) => (
 					<div className="space-x-3" key={product.id}>
-						<div className="bg-modulebackground w-full  p-5">
+						<div className="bg-modulebackground w-full p-5">
 							<img className="py-2 object-contain  h-full m-auto" src={product.img} alt=" product image"/>
 						</div>
 						<div>
