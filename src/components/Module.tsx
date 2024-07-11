@@ -1,15 +1,11 @@
 import {Perfume, perfumeData} from "../perfumeData.ts";
+import MostSold from "./MostSold.tsx";
 
 function Module () {
 	return (
 		<div className="flex flex-col">
 			<div className="hidden h-20 lg:inline-flex w-fit ml-auto">
-				<button className="bg-gray-950 p-2 flex h-fit space-x-20">
-					<span className="text-white">MEST SÅLDA</span>
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="white" className="size-6">
-						<path d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
-					</svg>
-				</button>
+				<MostSold />
 			</div>
 			<div className=" grid grid-cols-2 md:grid-cols-3 w-full gap-10 justify-items-center">
 				{perfumeData && perfumeData.map((product: Perfume) => (

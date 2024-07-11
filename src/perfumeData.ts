@@ -9,6 +9,7 @@ export interface Perfume {
 	price: number;
 	currency: string;
 	quantity: string;
+	popularity: number;
 }
 
 export const perfumeData: Perfume[] = [
@@ -21,6 +22,7 @@ export const perfumeData: Perfume[] = [
 		price: 450,
 		currency: 'kr',
 		quantity: '50 ml',
+		popularity: 401,
 	},
 	{
 		id: 2,
@@ -31,6 +33,7 @@ export const perfumeData: Perfume[] = [
 		price: 450,
 		currency: 'kr',
 		quantity: '50 ml',
+		popularity: 301
 	},
 	{
 		id: 3,
@@ -41,6 +44,7 @@ export const perfumeData: Perfume[] = [
 		price: 450,
 		currency: 'kr',
 		quantity: '50 ml',
+		popularity: 201
 	},
 	{
 		id: 4,
@@ -51,5 +55,6 @@ export const perfumeData: Perfume[] = [
 		price: 450,
 		currency: 'kr',
 		quantity: '50 ml',
+		popularity: 501,
 	}
 ]
