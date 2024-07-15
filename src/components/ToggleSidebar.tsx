@@ -9,7 +9,7 @@ function ToggleSidebar () {
 			<button className=" flex flex-row pt-2 mx-2"
 					onClick={() => setToggleShow(!toggleShow)}>VARUMÄRKE
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="black"
-					 className="size-6 ml-4">
+					className="size-6 ml-4">
 					<path d="m19.5 8.25-7.5 7.5-7.5-7.5"/>
 				</svg>
 			</button>

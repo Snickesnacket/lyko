@@ -1,5 +1,6 @@
 import {Perfume, perfumeData} from "../perfumeData.ts";
 import MostSold from "./MostSold.tsx";
+import {NavLink} from "react-router-dom";
 
 function Module () {
 	return (
@@ -8,7 +9,9 @@ function Module () {
 				<MostSold />
 			</div>
 			<div className=" grid grid-cols-2 md:grid-cols-3 w-full gap-10 justify-items-center">
+
 				{perfumeData && perfumeData.map((product: Perfume) => (
+					<NavLink key={product.id} to={`/products/${product.id}`}>
 					<div className="space-x-3" key={product.id}>
 						<div className="bg-modulebackground w-full p-5">
 							<img className="py-2 object-contain  h-full m-auto" src={product.img} alt=" product image"/>
@@ -29,6 +32,7 @@ function Module () {
 							</button>
 						</div>
 					</div>
+					</NavLink>
 				))}
 			</div>
 		</div>
