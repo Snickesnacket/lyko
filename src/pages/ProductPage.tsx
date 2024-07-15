@@ -1,21 +1,24 @@
 import { useParams} from 'react-router-dom'
-import {Perfume, perfumeData} from "../perfumeData.ts";
-import {useEffect, useState} from "react";
+import { perfumeData} from "../perfumeData.ts";
+import { useMemo} from "react";
 
 
 const ProductPage = () => {
 	const { id } = useParams()
 	const perfumeId = Number(id)
-	const [ perfume, setPerfume ] = useState<null | Perfume >( null)
 
-	useEffect(() => {
-		const fetchedPerfume = perfumeData.find((product =>  product.id === perfumeId));
-		if(fetchedPerfume) {
-			setPerfume(fetchedPerfume)
-		}
-	}, [perfumeId]);
+	const perfume = useMemo(() =>
+			perfumeData.find(product => product.id === perfumeId),
+		[perfumeId]
+	);
 
+	console.log('rendering')
 
+	if (!perfume) {
+		return <div>Loading...</div>
+	}
+
+console.log('rendering')
 	return (
 		<div className=" bg-modulebackground">
 			<div className="max-w-6xl m-auto bg-white p-10">
