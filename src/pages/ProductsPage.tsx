@@ -1,10 +1,30 @@
 import hero from "../assets/img.png";
-import React from "react";
 import Sidebar from "../components/Sidebar.tsx";
 import Module from "../components/Module.tsx";
-import { perfumeData } from "../perfumeData.ts";
+import { useProducts } from '../hooks/useProduct.ts'
+
 
 const ProductsPage: React.FC = () => {
+
+	//const [data, setData] = useState<Product[] | null>([])
+	const products  = useProducts();
+
+	console.log(products)
+/*	const getData = async ()=> {
+		const Response = await getProducts()
+		if(Response){
+			const productData = Response.data
+			console.log(productData)
+			setData(productData)
+		}
+
+	}
+
+	useEffect(() => {
+		getData()
+	}, [])*/
+
+
 	return (
 		<div className=" bg-modulebackground">
 			<div className="max-w-6xl m-auto">
@@ -31,8 +51,8 @@ const ProductsPage: React.FC = () => {
 					</div>
 					<div className="p-2 lg:space-x-10 space-x-0 lg:inline-flex flex-col w-fit mr-auto my-10 lg:flex-row ">
 						<div className="lg:flex-col">
-							{perfumeData && perfumeData.length && (
-								<div className=" font-bold lg:mr-auto pl-0.5 h-20 py-2 lg:text-left text-center">{`Produkter ${perfumeData.length}`}</div>
+							{products && products.length && (
+								<div className=" font-bold lg:mr-auto pl-0.5 h-20 py-2 lg:text-left text-center">{`Produkter ${products.length}`}</div>
 							)}
 							<Sidebar />
 						</div>
@@ -41,7 +61,8 @@ const ProductsPage: React.FC = () => {
 				</div>
 			</div>
 		</div>
+
 	);
 };
 
-export default ProductsPage;
+export default ProductsPage
