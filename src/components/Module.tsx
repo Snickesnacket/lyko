@@ -30,7 +30,7 @@ function Module () {
 									{product.Name}
 								</h3>
 								<section className="font-thin mt-7">
-									{truncateDescription(product.Description, 188)}
+									{truncateDescription(product.Description, 60)}
 								</section>
 								<span className="font-bold block">
 									{product.Price}

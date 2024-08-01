@@ -1,1 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="64" height="24" viewBox="0 0 64 24"><path d="M48.348 23.811h13.225v-4.29H48.348zM54.96.014c-4.708 0-8.537 3.909-8.537 8.712 0 4.804 3.83 8.714 8.537 8.714 4.708 0 8.538-3.91 8.538-8.714 0-4.803-3.83-8.712-8.538-8.712zm0 13.19c-2.418 0-4.385-2.008-4.385-4.478 0-2.468 1.967-4.475 4.385-4.475 2.417 0 4.387 2.007 4.387 4.475 0 2.47-1.97 4.477-4.387 4.477zM4.606.684H0v23.133h12.617v-4.296H4.606zm14.281 8.578L15.331.714h-5.14l6.4 13.363v9.734h4.591v-9.737L27.94.714h-5.173zM45.761.714H40.39L34.422 9.4l.064-8.686h-4.59v23.097h4.59v-7.313l2-2.912 4.79 10.225h5.43l-7.09-14.057z" fill="white"></path></svg>
+<svg width="200" height="40" viewBox="0 0 200 40" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+        <linearGradient id="blueGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" style="stop-color:#0033A0;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#66CCFF;stop-opacity:1" />
+        </linearGradient>
+        <filter id="blur" x="0" y="0" width="150%" height="150%">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.8" />
+        </filter>
+    </defs>
+    <text x="10" y="30" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="url(#blueGradient)" filter="url(#blur)">Holy Cheesus</text>
+    <line x1="10" y1="35" x2="190" y2="35" stroke="#66CCFF" stroke-width="2" stroke-linecap="round"/>
+</svg>
