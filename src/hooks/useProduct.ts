@@ -4,28 +4,28 @@ import {Product} from "../index.product.ts";
 
 export const useProducts = () => {
 
-		const {data: tmp} = useQuery<Product [] | undefined, Error>({
+		const {data: ResponseData} = useQuery<Product [] | undefined, Error>({
 			queryKey: ['products'],
 			queryFn: getProducts
 		});
 
-		if(!tmp) {
+		if(!ResponseData) {
 			return []
 		}
-		return tmp as Product[]
+		return ResponseData as Product[]
 };
 
 export const useProduct = (productId: number) => {
 	const id = Number(productId);
 
-	const { data: tmp } =  useQuery<Product [], Error>( {
+	const { data: ResponseData } =  useQuery<Product [], Error>( {
 		queryKey: ['product', productId],
 		queryFn: () => getProduct(id),
 		enabled: !!id,
 	});
-	if(!tmp) {
+	if(!ResponseData) {
 		return []
 	}
-	return tmp as Product[]
+	return ResponseData as Product[]
 
 };
