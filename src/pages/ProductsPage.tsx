@@ -1,7 +1,8 @@
-import hero from "../assets/img.png";
+import hero from "../assets/hero.webp";
 import Sidebar from "../components/Sidebar.tsx";
 import Module from "../components/Module.tsx";
 import { useProducts } from '../hooks/useProduct.ts'
+
 
 
 const ProductsPage: React.FC = () => {

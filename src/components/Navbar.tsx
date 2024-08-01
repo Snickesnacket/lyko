@@ -1,5 +1,5 @@
 
-import logo from '../assets/lyko.svg'
+import logo from '../assets/holy_cheesus.svg'
 import {useState} from "react";
 import {Link} from "react-router-dom";
 function Navbar () {
@@ -10,7 +10,7 @@ function Navbar () {
 		<>
 			<nav className="lg:hidden bg-gray-950 fixed top-0 left-0 right-0 p-5 h-20 flex justify-between items-center">
 					<div>
-						<img className="object-contain h-full" src={logo} alt="lyko-logga"/>
+						<Link to="/"><img className="object-contain h-full" src={logo} alt="holycheesus-logga"/></Link>
 					</div>
 					<ul
 						className={`flex flex-col absolute top-20 left-0 bg-gray-950 w-full pl-5 pb-5 gap-5 ${visibility ? '' : 'hidden'}`}>
