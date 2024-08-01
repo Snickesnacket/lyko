@@ -1,24 +1,11 @@
 
-import {useEffect, useState} from "react";
+import { useState} from "react";
 import {Product} from "../index.product.ts";
-import {getProducts} from "../services/productAPI.ts";
+
+import {useProducts} from "../hooks/useProduct.ts";
 
 function ToggleSidebar () {
-	const [data, setData] = useState<Product[] | null>([])
-
-	const getData = async ()=> {
-		const Response = await getProducts()
-		if(Response){
-			const productData = Response
-			console.log(productData)
-			setData(productData)
-		}
-
-	}
-
-	useEffect(() => {
-		getData()
-	}, [])
+	const products  = useProducts();
 
 	const [toggleShow, setToggleShow] = useState(false)
 	return (
@@ -34,7 +21,7 @@ function ToggleSidebar () {
 		</div>
 	<div className={` ${toggleShow ? '' : 'hidden'} h-full space-y-3 m-2 pb-2`}>
 		<input placeholder="SÖK" className="border-[0.5px] border-gray-300  px-2 py-1 "/>
-		{data && data.map((product: Product) => (
+		{products && products.map((product: Product) => (
 			<div key={product.Id} className="flex items-center space-x-3 px-2">
 				<input type="checkbox" id={`brand-${product.Id}`} className="form-checkbox"/>
 				<label htmlFor={`brand-${product.Id}`} className="text-sm">{product.Name}</label>

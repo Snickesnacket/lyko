@@ -1,26 +1,15 @@
 
 import MostSold from "./MostSold.tsx";
 import {NavLink} from "react-router-dom";
-import {useEffect, useState} from "react";
 import {Product} from "../index.product.ts";
-import {getProducts} from "../services/productAPI.ts";
+import {useProducts} from "../hooks/useProduct.ts";
 
 function Module () {
-	const [data, setData] = useState<Product[] | null>([])
+	const products  = useProducts();
 
-	const getData = async ()=> {
-		const Response = await getProducts()
-		if(Response){
-			const productData = Response
-			console.log(productData)
-			setData(productData)
-		}
-
+	function truncateDescription (description: string, count: number) {
+		return description.length > count ? `${description.substring(0, count)}...` : description;
 	}
-
-	useEffect(() => {
-		getData()
-	}, [])
 
 	return (
 		<div className="flex flex-col">
@@ -29,23 +18,23 @@ function Module () {
 			</div>
 			<div className=" grid grid-cols-2 md:grid-cols-3 w-full gap-10">
 
-				{data && data.map((product: Product) => (
+				{products && products.map((product: Product) => (
 					<div key={product.Id}>
 					<div className="space-x-3">
 						<NavLink key={product.Id} to={`/products/${product.Id}`}>
 							<div className="bg-modulebackground w-full p-5">
-							<img className="py-2 object-contain  h-full m-auto" src={`http://localhost:3000/img/${product.images ? product.images.split(',')[0] : ''}`} alt=" product image"/>
-						</div>
+								<img className="py-2 object-contain  h-full m-auto" src={`http://localhost:3000/img/${product.images ? product.images.split(',')[0] : ''}`} alt=" product image"/>
+							</div>
 							<div>
 								<h3 className="font-bold pt-4">
 									{product.Name}
 								</h3>
 								<section className="font-thin mt-7">
-									{product.Description}
+									{truncateDescription(product.Description, 188)}
 								</section>
 								<span className="font-bold block">
-								{product.Price}
-							</span>
+									{product.Price}
+								</span>
 							</div>
 						</NavLink>
 					</div>

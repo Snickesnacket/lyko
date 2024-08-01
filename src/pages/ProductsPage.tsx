@@ -6,24 +6,7 @@ import { useProducts } from '../hooks/useProduct.ts'
 
 const ProductsPage: React.FC = () => {
 
-	//const [data, setData] = useState<Product[] | null>([])
 	const products  = useProducts();
-
-	console.log(products)
-/*	const getData = async ()=> {
-		const Response = await getProducts()
-		if(Response){
-			const productData = Response.data
-			console.log(productData)
-			setData(productData)
-		}
-
-	}
-
-	useEffect(() => {
-		getData()
-	}, [])*/
-
 
 	return (
 		<div className=" bg-modulebackground">
