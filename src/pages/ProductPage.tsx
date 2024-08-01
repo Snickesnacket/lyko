@@ -1,5 +1,5 @@
 
-import { useParams} from 'react-router-dom'
+import {useNavigate, useParams} from 'react-router-dom'
 import {useProduct} from "../hooks/useProduct.ts";
 import {Product} from "../index.product.ts";
 
@@ -7,9 +7,10 @@ import {Product} from "../index.product.ts";
 const ProductPage = () => {
 	const { id } = useParams()
 	const productId = Number(id)
+	const navigate = useNavigate()
 	const products: Product [] = useProduct(productId)
-	if(!products) {
-		console.error('woopsi')
+	if(!products || products.length === 0 || products[0].Id != productId) {
+		navigate('*')
 	}
 
 	return (
