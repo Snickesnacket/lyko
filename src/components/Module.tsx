@@ -5,7 +5,9 @@ import {Product} from "../index.product.ts";
 import {useProducts} from "../hooks/useProduct.ts";
 
 function Module () {
-	const products  = useProducts();
+	const products = useProducts(1, 10);
+
+
 
 	function truncateDescription (description: string, count: number) {
 		return description.length > count ? `${description.substring(0, count)}...` : description;

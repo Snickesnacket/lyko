@@ -2,12 +2,28 @@ import hero from "../assets/hero.webp";
 import Sidebar from "../components/Sidebar.tsx";
 import Module from "../components/Module.tsx";
 import { useProducts } from '../hooks/useProduct.ts'
+import {useSearchParams} from "react-router-dom";
+import {useEffect} from "react";
 
 
 
 const ProductsPage: React.FC = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
+	const limit = 10
+	const page = Number(searchParams.get('page') || '1');
+	const products  = useProducts(page, limit);
 
-	const products  = useProducts();
+	useEffect(() => {
+		setSearchParams({page: `${page}`, limit: `${limit}` || 10})
+	}, []);
+
+	const loadNext = () => {
+		setSearchParams({ page: (Number(page) + 1).toString(), limit: (Number(limit)).toString()});
+	};
+
+	const loadPrevious = () => {
+		setSearchParams({ page: (Number(page) - 1).toString() });
+	};
 
 	return (
 		<div className=" bg-modulebackground">
@@ -40,8 +56,15 @@ const ProductsPage: React.FC = () => {
 							)}
 							<Sidebar />
 						</div>
+						{Number(page) > 1 && (
+							<button className="bg-blend-color" onClick={loadPrevious}>Load Previous</button>
+						)}
 						<Module />
+
 					</div>
+					{products.length > 0 && (
+						<button onClick={loadNext}>Load More</button>
+					)}
 				</div>
 			</div>
 		</div>

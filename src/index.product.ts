@@ -21,4 +21,8 @@ export interface Property {
 export interface ApiResponse {
 	status: string;
 	data: Product[];
+	pageNum: number;
+	last_page: number;
 }
+
+

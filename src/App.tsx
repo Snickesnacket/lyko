@@ -7,7 +7,7 @@ import NotFound from "./pages/NotFound";
 const App = () => {
 	return (
 		<Routes>
-			<Route path="/" element={<ProductsPage />} />
+			<Route path="/:limit" element={<ProductsPage />} />
 			<Route path="/products/:id" element={<ProductPage />} />
 			<Route path="*" element={<NotFound />} />
 		</Routes>

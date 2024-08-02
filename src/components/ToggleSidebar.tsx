@@ -4,8 +4,9 @@ import {Product} from "../index.product.ts";
 
 import {useProducts} from "../hooks/useProduct.ts";
 
+
 function ToggleSidebar () {
-	const products  = useProducts();
+	const products  = useProducts(0,10);
 
 	const [toggleShow, setToggleShow] = useState(false)
 	return (
