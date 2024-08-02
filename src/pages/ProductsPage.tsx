@@ -3,19 +3,14 @@ import Sidebar from "../components/Sidebar.tsx";
 import Module from "../components/Module.tsx";
 import { useProducts } from '../hooks/useProduct.ts'
 import {useSearchParams} from "react-router-dom";
-import {useEffect} from "react";
-
-
 
 const ProductsPage: React.FC = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const limit = 10
 	const page = Number(searchParams.get('page') || '1');
-	const products  = useProducts(page, limit);
 
-	useEffect(() => {
-		setSearchParams({page: `${page}`, limit: `${limit}` || 10})
-	}, []);
+	const products = useProducts(page, limit);
+	console.log(products)
 
 	const loadNext = () => {
 		setSearchParams({ page: (Number(page) + 1).toString(), limit: (Number(limit)).toString()});
@@ -26,6 +21,7 @@ const ProductsPage: React.FC = () => {
 	};
 
 	return (
+
 		<div className=" bg-modulebackground">
 			<div className="max-w-6xl m-auto">
 				<header className=" w-full">

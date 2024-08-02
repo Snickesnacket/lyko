@@ -1,11 +1,15 @@
 
 import MostSold from "./MostSold.tsx";
-import {NavLink} from "react-router-dom";
+import {NavLink, useSearchParams} from "react-router-dom";
 import {Product} from "../index.product.ts";
 import {useProducts} from "../hooks/useProduct.ts";
 
 function Module () {
-	const products = useProducts(1, 10);
+	const [searchParams, setSearchParams] = useSearchParams();
+	const limit = 10
+	const page = Number(searchParams.get('page') || '1');
+
+	const products = useProducts(page, limit);
 
 
 

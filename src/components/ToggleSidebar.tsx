@@ -3,11 +3,14 @@ import { useState} from "react";
 import {Product} from "../index.product.ts";
 
 import {useProducts} from "../hooks/useProduct.ts";
-
+import {useSearchParams} from "react-router-dom";
 
 function ToggleSidebar () {
-	const products  = useProducts(0,10);
+	const [searchParams, setSearchParams] = useSearchParams();
+	const limit = 10
+	const page = Number(searchParams.get('page') || '1');
 
+	const products = useProducts(page, limit);
 	const [toggleShow, setToggleShow] = useState(false)
 	return (
 		<div>
