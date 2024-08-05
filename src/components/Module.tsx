@@ -1,18 +1,13 @@
 
 import MostSold from "./MostSold.tsx";
-import {NavLink, useSearchParams} from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import {Product} from "../index.product.ts";
-import {useProducts} from "../hooks/useProduct.ts";
-
-function Module () {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const limit = 10
-	const page = Number(searchParams.get('page') || '1');
-
-	const products = useProducts(page, limit);
 
 
-
+interface IProps {
+	products: Product[]
+}
+const Module: React.FC<IProps> = ({products}) => {
 	function truncateDescription (description: string, count: number) {
 		return description.length > count ? `${description.substring(0, count)}...` : description;
 	}

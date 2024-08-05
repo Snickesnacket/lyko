@@ -2,15 +2,13 @@
 import { useState} from "react";
 import {Product} from "../index.product.ts";
 
-import {useProducts} from "../hooks/useProduct.ts";
-import {useSearchParams} from "react-router-dom";
 
-function ToggleSidebar () {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const limit = 10
-	const page = Number(searchParams.get('page') || '1');
+interface IProps {
+	products: Product[]
+}
 
-	const products = useProducts(page, limit);
+const ToggleSidebar: React.FC<IProps> = ({products}) =>  {
+
 	const [toggleShow, setToggleShow] = useState(false)
 	return (
 		<div>

@@ -9,6 +9,7 @@ export const useProducts = (page: number, limit: number) => {
 		enabled: !!page,
 	});
 
+	console.log(ResponseData)
 	return ResponseData || [];
 }
 

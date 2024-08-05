@@ -4,13 +4,16 @@ import Module from "../components/Module.tsx";
 import { useProducts } from '../hooks/useProduct.ts'
 import {useSearchParams} from "react-router-dom";
 
+
 const ProductsPage: React.FC = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const limit = 10
 	const page = Number(searchParams.get('page') || '1');
 
-	const products = useProducts(page, limit);
-	console.log(products)
+	const data  = useProducts(page, limit)
+
+
+	console.log(data)
 
 	const loadNext = () => {
 		setSearchParams({ page: (Number(page) + 1).toString(), limit: (Number(limit)).toString()});
@@ -47,18 +50,18 @@ const ProductsPage: React.FC = () => {
 					</div>
 					<div className="p-2 lg:space-x-10 space-x-0 lg:inline-flex flex-col w-fit mr-auto my-10 lg:flex-row ">
 						<div className="lg:flex-col">
-							{products && products.length && (
-								<div className=" font-bold lg:mr-auto pl-0.5 h-20 py-2 lg:text-left text-center">{`Produkter ${products.length}`}</div>
+							{data && data.length && (
+								<div className=" font-bold lg:mr-auto pl-0.5 h-20 py-2 lg:text-left text-center">{`Produkter ${data.length}`}</div>
 							)}
-							<Sidebar />
+							<Sidebar products={data} />
 						</div>
 						{Number(page) > 1 && (
 							<button className="bg-blend-color" onClick={loadPrevious}>Load Previous</button>
 						)}
-						<Module />
+						<Module products={data}/>
 
 					</div>
-					{products.length > 0 && (
+					{data.length > 0 && (
 						<button onClick={loadNext}>Load More</button>
 					)}
 				</div>
