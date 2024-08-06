@@ -17,7 +17,7 @@ const Module: React.FC<IProps> = ({products}) => {
 			<div className="hidden h-20 lg:inline-flex w-fit ml-auto">
 				<MostSold />
 			</div>
-			<div className=" grid grid-cols-2 md:grid-cols-3 w-full gap-10">
+			<div className=" grid grid-cols-1 md:grid-cols-3 w-full gap-10">
 
 				{products && products.map((product: Product) => (
 					<div key={product.Id}>
