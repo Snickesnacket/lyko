@@ -16,13 +16,6 @@ const ProductPage = () => {
 	const { data: response, isError: isProductError, error: productError } = useProduct(productId);
 
 	useEffect(() => {
-		if (isProductError) {
-			console.error(productError);
-			navigate('/*');
-		}
-	}, [isProductError, productError, navigate]);
-
-	useEffect(() => {
 		if (!response && !isProductError) {
 			setLoading(true);
 		} else if (isProductError || !response) {

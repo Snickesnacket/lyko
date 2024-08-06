@@ -26,3 +26,9 @@ export interface ApiResponse {
 }
 
 
+export interface Filter {
+	price?: string,
+	country?: string,
+	flavor?: string,
+	consistency?: string
+}

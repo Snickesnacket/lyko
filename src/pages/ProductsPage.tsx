@@ -1,31 +1,41 @@
 import hero from "../assets/hero.webp";
 import Sidebar from "../components/Sidebar.tsx";
 import Module from "../components/Module.tsx";
-import { useProducts } from '../hooks/useProduct.ts'
-import {useSearchParams} from "react-router-dom";
+import { useProducts} from '../hooks/useProduct.ts'
+import {useNavigate, useSearchParams} from "react-router-dom";
 import Pagination from "../components/Pagination.tsx";
-
+import {useEffect, useState} from "react";
+import {Filter} from "../index.product.ts";
 
 
 const ProductsPage = () => {
 	const [searchParams, setSearchParams] = useSearchParams({ page:'1', limit: '10'});
 	const page = Number(searchParams.get('page') || '1');
 	const limit = Number(searchParams.get('limit') || '10');
+	const [loading, setLoading] = useState<boolean>(true);
+	let filter: Filter[] | undefined
 
-	const {data: Products, isError, error, isLoading} = useProducts(page, limit);
+	const navigate = useNavigate();
+
+	const { data: response, isError: isProductError, error: productError } = useProducts(page, limit, filter);
+
+	useEffect(() => {
+		if (!response && !isProductError) {
+			setLoading(true);
+		} else if (isProductError || !response) {
+			console.error(productError);
+			navigate('/*');
+		} else {
+			setLoading(false);
+		}
+	}, [productError, isProductError, navigate, response]);
+
+	if (loading) {
+		return <div>Loading...</div>;
+	}
 
 	return (
 		<>
-			{isError && (
-				<>
-					{error}
-				</>
-			)}
-
-			{isLoading && (
-				<p>Loading books...</p>
-			)}
-
 			<div className=" bg-modulebackground">
 				<div className="max-w-6xl m-auto">
 					<header className=" w-full">
@@ -49,22 +59,22 @@ const ProductsPage = () => {
 								</p>
 							</div>
 						</div>
-						{Products && Products.data?.length && (
+						{response && response.data?.length && (
 							<>
 								<div className="p-2 lg:space-x-10 space-x-0 lg:inline-flex flex-col w-fit mr-auto my-10 lg:flex-row ">
 									<div className="lg:flex-col">
 
-											<div className=" font-bold lg:mr-auto pl-0.5 h-20 py-2 lg:text-left text-center">{`Produkter ${Products.data.length}`}</div>
+											<div className=" font-bold lg:mr-auto pl-0.5 h-20 py-2 lg:text-left text-center">{`Produkter ${response.data.length}`}</div>
 
-										<Sidebar products={Products.data} />
+										<Sidebar products={response.data} />
 									</div>
-									<Module products={Products.data}/>
+									<Module products={response.data}/>
 								</div>
 								<Pagination
 									page={page}
-									totalPages={Products.pageNum}
+									totalPages={response.pageNum}
 									hasPreviousPage={page > 1 }
-									hasNextPage={page < Products.last_page}
+									hasNextPage={page < response.last_page}
 									onPreviousPage={() => { setSearchParams({page: String(page -1), limit: '10'})}}
 									onNextPage={() => { setSearchParams({page: String(page  + 1), limit: '10'})}}
 								/>

@@ -1,8 +1,8 @@
-import {ApiResponse} from "../index.product.ts";
+import {ApiResponse, Filter} from "../index.product.ts";
 const BASE_URL = import.meta.env.VITE_PUBLIC_API_URL;
 
-export const getProducts = async (page: number, limit: number): Promise<ApiResponse> => {
-		const response = await fetch(`${BASE_URL}/products?page=${page}&limit=${limit}`);
+export const getProducts = async (page: number, limit: number, filter: Filter[] | undefined): Promise<ApiResponse> => {
+		const response = await fetch(`${BASE_URL}/products?page=${page}&limit=${limit}&filter[price]=${filter}&filter[country]=${filter}&filter[flavor]=${filter}&filter[consistency]=${filter}`);
 		if (!response.ok) {
 			throw new Error(`${response.status} ${response.statusText}`);
 		}

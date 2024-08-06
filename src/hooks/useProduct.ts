@@ -1,10 +1,10 @@
 import {useQuery} from '@tanstack/react-query';
 import {getProduct, getProducts} from '../services/productAPI.ts';
-import {ApiResponse} from "../index.product.ts";
-export const useProducts = (page: number, limit: number) => {
+import {ApiResponse, Filter} from "../index.product.ts";
+export const useProducts = (page: number, limit: number, filter: Filter[] | undefined ) => {
 	return useQuery<ApiResponse, Error>({
 		queryKey: ['products', page, limit],
-		queryFn: () => getProducts(page, limit),
+		queryFn: () => getProducts(page, limit, filter),
 		enabled: !!page && !!limit
 	});
 }
