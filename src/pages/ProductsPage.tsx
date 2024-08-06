@@ -3,27 +3,33 @@ import Sidebar from "../components/Sidebar.tsx";
 import Module from "../components/Module.tsx";
 import { useProducts } from '../hooks/useProduct.ts'
 import {useSearchParams} from "react-router-dom";
+import Pagination from "../components/Pagination.tsx";
 
+interface IProps {
+	heading?: string
+	children: React.ReactNode
+}
 
-const ProductsPage: React.FC = () => {
-	const [searchParams, setSearchParams] = useSearchParams();
-	const limit = 10
+const ProductsPage: React.FC<IProps> = ({ heading = 'Warning', children}) => {
+	const [searchParams, setSearchParams] = useSearchParams({ page:'1', limit: '10'});
 	const page = Number(searchParams.get('page') || '1');
+	const limit = Number(searchParams.get('limit') || '10');
 
-	const data  = useProducts(page, limit)
-
-
-	console.log(data)
-
-	const loadNext = () => {
-		setSearchParams({ page: (Number(page) + 1).toString(), limit: (Number(limit)).toString()});
-	};
-
-	const loadPrevious = () => {
-		setSearchParams({ page: (Number(page) - 1).toString() });
-	};
+	const {data: Products, isError, error, isLoading} = useProducts(page, limit);
 
 	return (
+		<>
+		{isError && (
+			<>
+				<h1>{heading}</h1>
+				{children}
+				{error}
+			</>
+		)}
+
+		{isLoading && (
+			<p>Loading books...</p>
+		)}
 
 		<div className=" bg-modulebackground">
 			<div className="max-w-6xl m-auto">
@@ -48,26 +54,31 @@ const ProductsPage: React.FC = () => {
 							</p>
 						</div>
 					</div>
+					{Products && Products.data?.length && (
+						<>
 					<div className="p-2 lg:space-x-10 space-x-0 lg:inline-flex flex-col w-fit mr-auto my-10 lg:flex-row ">
 						<div className="lg:flex-col">
-							{data && data.length && (
-								<div className=" font-bold lg:mr-auto pl-0.5 h-20 py-2 lg:text-left text-center">{`Produkter ${data.length}`}</div>
-							)}
-							<Sidebar products={data} />
-						</div>
-						{Number(page) > 1 && (
-							<button className="bg-blend-color" onClick={loadPrevious}>Load Previous</button>
-						)}
-						<Module products={data}/>
 
+								<div className=" font-bold lg:mr-auto pl-0.5 h-20 py-2 lg:text-left text-center">{`Produkter ${Products.data.length}`}</div>
+
+							<Sidebar products={Products.data} />
+						</div>
+						<Module products={Products.data}/>
 					</div>
-					{data.length > 0 && (
-						<button onClick={loadNext}>Load More</button>
-					)}
+						<Pagination
+							page={page}
+							totalPages={Products.pageNum}
+							hasPreviousPage={page > 1 }
+							hasNextPage={page < Products.last_page}
+							onPreviousPage={() => { setSearchParams({page: String(page -1), limit: '10'})}}
+							onNextPage={() => { setSearchParams({page: String(page  + 1), limit: '10'})}}
+						/>
+						</>
+				)}
 				</div>
 			</div>
 		</div>
-
+		</>
 	);
 };
 

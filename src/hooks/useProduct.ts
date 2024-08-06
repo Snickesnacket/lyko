@@ -1,22 +1,18 @@
 import {useQuery} from '@tanstack/react-query';
 import {getProduct, getProducts} from '../services/productAPI.ts';
-import {Product} from "../index.product.ts";
+import {ApiResponse, Product} from "../index.product.ts";
 export const useProducts = (page: number, limit: number) => {
-
-	const {data: ResponseData} = useQuery<Product [] | undefined, Error>({
+	return useQuery<ApiResponse, Error>({
 		queryKey: ['products', page, limit],
 		queryFn: () => getProducts(page, limit),
-		enabled: !!page,
+		enabled: !!page && !!limit
 	});
-
-	console.log(ResponseData)
-	return ResponseData || [];
 }
 
 export const useProduct = (productId: number) => {
 	const id = Number(productId);
 
-	const { data: ResponseData } =  useQuery<Product [], Error>( {
+	const { data: ResponseData } = useQuery<Product [], Error>( {
 		queryKey: ['product', productId],
 		queryFn: () => getProduct(id),
 		enabled: !!id,
