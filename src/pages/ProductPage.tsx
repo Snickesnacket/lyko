@@ -1,22 +1,47 @@
 
 import {useNavigate, useParams} from 'react-router-dom'
 import {useProduct} from "../hooks/useProduct.ts";
-import {Product} from "../index.product.ts";
+import {useEffect, useState} from "react";
+
+
 
 
 const ProductPage = () => {
-	const { id } = useParams()
-	const productId = Number(id)
-	const navigate = useNavigate()
-	const products: Product [] = useProduct(productId)
-	if(!products || products.length === 0 || products[0].Id != productId) {
-		navigate('*')
+	const { id } = useParams();
+	const productId = Number(id);
+	const navigate = useNavigate();
+	const [loading, setLoading] = useState<boolean>(true);
+
+
+	const { data: response, isError: isProductError, error: productError } = useProduct(productId);
+
+	useEffect(() => {
+		if (isProductError) {
+			console.error(productError);
+			navigate('/*');
+		}
+	}, [isProductError, productError, navigate]);
+
+	useEffect(() => {
+		if (!response && !isProductError) {
+			setLoading(true);
+		} else if (isProductError || !response) {
+			console.error(productError);
+			navigate('/*');
+		} else {
+			setLoading(false);
+		}
+	}, [productError, isProductError, navigate, response]);
+
+	if (loading) {
+		return <div>Loading...</div>;
 	}
 
 	return (
+
 		<div className=" bg-modulebackground">
 			<div className="max-w-6xl m-auto bg-white p-10">
-				{ products && products.map( product => (
+				{ response && response.data.map( product => (
 					<div key={product.Id} className="grid grid-cols-1 md:grid-cols-2 items-center gap-10 md:gap-20 md:items-start  ">
 						<div className="w-full p-5 border-greybackground border-[1px]">
 							<img className="py-2 object-contain  h-full m-auto" src={`http://localhost:3000/img/${product.images ? product.images.split(',')[0] : ''}`} alt=" product image"/>

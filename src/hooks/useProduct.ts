@@ -1,6 +1,6 @@
 import {useQuery} from '@tanstack/react-query';
 import {getProduct, getProducts} from '../services/productAPI.ts';
-import {ApiResponse, Product} from "../index.product.ts";
+import {ApiResponse} from "../index.product.ts";
 export const useProducts = (page: number, limit: number) => {
 	return useQuery<ApiResponse, Error>({
 		queryKey: ['products', page, limit],
@@ -12,10 +12,10 @@ export const useProducts = (page: number, limit: number) => {
 export const useProduct = (productId: number) => {
 	const id = Number(productId);
 
-	const { data: ResponseData } = useQuery<Product [], Error>( {
+	return useQuery<ApiResponse, Error>( {
 		queryKey: ['product', productId],
-		queryFn: () => getProduct(id),
+		queryFn: async () => await getProduct(id),
 		enabled: !!id,
+		retry: false
 	});
-	return ResponseData || [];
 };
