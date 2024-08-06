@@ -14,7 +14,7 @@ function Navbar () {
 					</div>
 					<ul
 						className={`flex flex-col absolute top-20 left-0 bg-gray-950 w-full pl-5 pb-5 gap-5 ${visibility ? '' : 'hidden'}`}>
-						<Link className="text-white" to="/">Produkter</Link>
+						<Link className="text-white" to="/products">Produkter</Link>
 						<Link className="text-white" to="/admin">Admin</Link>
 						<Link className="text-white" to="/Kassa">Kassa</Link>
 					</ul>
@@ -29,7 +29,7 @@ function Navbar () {
 				<div className="max-w-6xl flex px-5 w-full justify-between m-auto">
 					<img className="object-contain h-full" src={logo} alt="lyko-logga"/>
 					<ul className="bg-gray-950 space-x-3">
-						<Link className="text-white" to="/">Products</Link>
+						<Link className="text-white" to="/products">Products</Link>
 						<Link className="text-white" to="/admin">Admin</Link>
 						<Link className="text-white" to="/Kassa">Kassa</Link>
 					</ul>
