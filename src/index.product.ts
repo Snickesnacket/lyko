@@ -1,12 +1,12 @@
 export interface Product {
-	Id: number;
-	Name: string;
-	Description: string;
-	Price: number;
-	CreatedAt: string;
-	UpdatedAt: string;
+	id: number;
+	name: string;
+	description: string;
+	price: number;
+	createdAt: string;
+	updatedAt: string;
 	deletedAt: string | null;
-	Properties_Values: string;
+	properties_Values: string;
 	images: string | null;
 	properties: Property[];
 }

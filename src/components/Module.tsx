@@ -20,21 +20,21 @@ const Module: React.FC<IProps> = ({products}) => {
 			<div className=" grid grid-cols-1 md:grid-cols-3 w-full gap-10">
 
 				{products && products.map((product: Product) => (
-					<div key={product.Id}>
+					<div key={product.id}>
 					<div className="space-x-3">
-						<NavLink key={product.Id} to={`/products/${product.Id}`}>
+						<NavLink key={product.id} to={`/products/${product.id}`}>
 							<div className="bg-modulebackground w-full p-5">
 								<img className="py-2 object-contain  h-full m-auto" src={`http://localhost:3000/img/${product.images ? product.images.split(',')[0] : ''}`} alt=" product image"/>
 							</div>
 							<div>
 								<h3 className="font-bold pt-4">
-									{product.Name}
+									{product.name}
 								</h3>
 								<section className="font-thin mt-7">
-									{truncateDescription(product.Description, 60)}
+									{truncateDescription(product.description, 60)}
 								</section>
 								<span className="font-bold block">
-									{product.Price}
+									{product.price}
 								</span>
 							</div>
 						</NavLink>
