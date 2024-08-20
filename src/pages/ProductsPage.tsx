@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar.tsx";
 import Module from "../components/Module.tsx";
 import {useSearchParams} from "react-router-dom";
 import Pagination from "../components/Pagination.tsx";
-import Spinner from "../utils/Spinner.tsx";
+
 import {useEffect} from "react";
 import {useProductContext} from "../contexts/productContext.ts";
 
