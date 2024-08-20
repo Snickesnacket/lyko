@@ -13,8 +13,8 @@ export const useProduct = (productId: number) => {
 	const id = Number(productId);
 
 	return useQuery<ApiResponse, Error>( {
-		queryKey: ['product', productId],
-		queryFn: async () => await getProduct(id),
+		queryKey: ['product', id],
+		queryFn:  () => getProduct(id),
 		enabled: !!id,
 		retry: false
 	});
